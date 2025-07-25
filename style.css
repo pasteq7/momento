@@ -1,0 +1,378 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --font-family: 'Inter', sans-serif;
+
+    /* Catppuccin Mocha Palette */
+    --rosewater: #f5e0dc; --flamingo: #f2cdcd; --pink: #f5c2e7;
+    --mauve: #cba6f7;     /* Primary Accent */
+    --red: #f38ba8;       /* Deletions */
+    --maroon: #eba0ac;    --peach: #fab387; --yellow: #f9e2af;
+    --green: #a6e3a1;     /* Success, Completion */
+    --teal: #94e2d5;      --sky: #89dceb; --sapphire: #74c7ec;
+    --blue: #89b4fa;      /* Secondary Accent */
+    --lavender: #b4befe;
+
+    --text: #cdd6f4;      /* Primary Text */
+    --subtext1: #bac2de;  --subtext0: #a6adc8; /* Secondary Text */
+    --overlay2: #9399b2;  --overlay1: #7f849c; --overlay0: #6c7086;
+
+    --surface2: #585b70;  --surface1: #45475a; /* UI Hover */
+    --surface0: #313244;  /* UI Elements */
+    
+    --base: #1e1e2e;      /* Main Container Background */
+    --mantle: #181825;    /* Body Background */
+    --crust: #11111b;
+}
+
+/* Visually Hidden Class for Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Announcer for screen readers */
+.sr-announcer {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--mantle);
+    margin: 0;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    color: var(--text);
+}
+
+.container {
+    background-color: var(--base);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--surface0);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+}
+
+/* Improved Focus States for Accessibility */
+:focus-visible {
+    outline: 3px solid var(--sapphire);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px var(--base);
+    border-radius: 4px;
+}
+
+header { margin-bottom: 2rem; }
+
+.project-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+#project-selector {
+    flex-grow: 1;
+    background-color: var(--surface0);
+    color: var(--text);
+    border: 1px solid var(--surface1);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23cdd6f4%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.65em auto;
+}
+#project-selector:focus { 
+    outline-color: var(--mauve); 
+    outline-width: 2px;
+    box-shadow: none;
+}
+
+.project-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.header-action-btn {
+    width: 42px;
+    height: 42px;
+    border: none;
+    background-color: var(--surface0);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s, color 0.3s;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+.header-action-btn:hover:not(:disabled) { background-color: var(--surface1); }
+.header-action-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#add-project-btn { 
+    color: var(--mauve);
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding: 0;
+}
+#edit-project-btn { color: var(--blue); }
+#delete-project-btn { color: var(--red); }
+#copy-all-tasks-btn { color: var(--sky); }
+.header-action-btn.copied { color: var(--green) !important; }
+
+
+.task-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+
+#project-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0;
+}
+
+#task-count {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--subtext0);
+    background-color: var(--surface0);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+}
+
+.progress-container {
+    background-color: var(--surface0);
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+}
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: var(--green);
+    border-radius: 10px;
+    transition: width 0.4s ease-in-out;
+}
+
+#task-form {
+    display: flex;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+#task-input {
+    flex-grow: 1; padding: 1rem; border: 2px solid var(--surface0);
+    border-radius: 12px; font-size: 1rem; background-color: var(--mantle);
+    color: var(--text); outline: none; transition: border-color 0.3s, box-shadow 0.3s;
+    padding-right: 4rem;
+}
+#task-input::placeholder { color: var(--subtext0); }
+#task-input:focus {
+    border-color: var(--mauve);
+    box-shadow: 0 0 0 4px rgba(203, 166, 247, 0.2);
+    outline: none; /* Override the generic focus-visible for this specific styled input */
+}
+
+#task-form button {
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border: none; background-color: var(--mauve);
+    color: var(--crust); border-radius: 8px; cursor: pointer;
+    font-size: 1.8rem; font-weight: 400; transition: background-color 0.3s;
+    display: flex; justify-content: center; align-items: center;
+}
+#task-form button:hover { background-color: var(--lavender); }
+
+.task-controls {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.5rem; padding: 0 0.5rem;
+}
+
+#filter-buttons button {
+    background: none; border: none; color: var(--subtext0); cursor: pointer;
+    font-size: 0.95rem; font-weight: 600; margin-right: 0.5rem;
+    padding: 0.5rem 0.8rem; border-radius: 8px; transition: background-color 0.3s, color 0.3s;
+}
+#filter-buttons button:hover { color: var(--text); background-color: var(--surface0); }
+#filter-buttons button.active {
+    color: var(--mauve);
+    background-color: rgba(203, 166, 247, 0.1);
+}
+
+#clear-completed-btn {
+    background: none; border: none; color: var(--red); cursor: pointer;
+    font-size: 0.9rem; font-weight: 500; opacity: 0.8;
+    transition: opacity 0.3s, color 0.3s;
+}
+#clear-completed-btn:hover { opacity: 1; color: var(--maroon); }
+
+#task-list { list-style: none; padding: 0; margin: 0; }
+
+#task-list li {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem; border-bottom: 1px solid var(--surface0);
+    transition: background-color 0.2s, color 0.3s; 
+    position: relative;
+    animation: slideIn 0.3s ease-out forwards;
+}
+#task-list li.removing {
+    animation: slideOut 0.3s ease-in forwards;
+}
+#task-list li:last-child { border-bottom: none; }
+#task-list li.completed .task-text { text-decoration: line-through; color: var(--overlay0); transition: color 0.3s; }
+
+/* MODIFIED: .task-checkbox is now a button */
+.task-checkbox {
+    /* Reset button styles */
+    background: none;
+    padding: 0;
+    margin: 0;
+    /* Original styles */
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--surface1);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: border-color 0.3s, background-color 0.3s;
+    flex-shrink: 0;
+}
+.task-checkbox:hover { border-color: var(--mauve); }
+#task-list li.completed .task-checkbox {
+    background-color: var(--green); border-color: var(--green); color: var(--crust);
+}
+.task-checkbox svg {
+    width: 14px; height: 14px; opacity: 0; transform: scale(0.5);
+    transition: opacity 0.2s, transform 0.2s;
+}
+#task-list li.completed .task-checkbox svg { opacity: 1; transform: scale(1); }
+
+.task-text { flex-grow: 1; cursor: pointer; }
+.edit-input {
+    flex-grow: 1; padding: 0; margin: 0; border: none;
+    font-size: 1rem; background-color: transparent; color: var(--text);
+    outline: none; font-family: var(--font-family);
+}
+.edit-input.hidden { display: none; }
+.task-text.hidden { display: none; }
+
+
+.task-actions {
+    display: flex; align-items: center; gap: 0.25rem;
+    opacity: 0; transition: opacity 0.3s;
+}
+#task-list li:hover .task-actions { opacity: 1; }
+
+.action-btn {
+    background: none; border: none; cursor: pointer;
+    padding: 0.5rem; color: var(--overlay1);
+}
+.action-btn:hover { background-color: var(--surface0); border-radius: 6px; }
+.action-btn.edit-btn:hover { color: var(--blue); }
+.action-btn.copy-btn:hover { color: var(--sky); }
+.action-btn.delete-btn:hover { color: var(--red); }
+.action-btn svg { width: 16px; height: 16px; display: block; }
+
+.dragging { opacity: 0.5; background: var(--surface0); }
+@keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(20px); } }
+
+
+#empty-state { text-align: center; padding: 3rem 1rem; transition: opacity 0.3s; }
+.empty-state-img { width: 150px; height: auto; margin-bottom: 1.5rem; opacity: 0.5; }
+#empty-state p { font-size: 1.2rem; font-weight: 500; color: var(--text); margin: 0 0 0.5rem 0; }
+#empty-state span { font-size: 1rem; color: var(--subtext0); }
+.hidden { display: none; }
+
+/* Style for the element being dragged */
+.dragging {
+    opacity: 0.5;
+    background: var(--surface0);
+}
+
+/* Visual indicator for the drop position */
+#task-list li.drop-indicator {
+    position: relative;
+}
+
+#task-list li.drop-indicator::before {
+    content: '';
+    position: absolute;
+    top: -2px; /* Position the line above the list item */
+    left: 2rem;
+    right: 2rem;
+    height: 4px;
+    background-color: var(--mauve);
+    border-radius: 2px;
+    z-index: 10;
+}
+
+.action-btn.copied, .action-btn.copied:hover {
+    color: var(--green);
+}
+
+/*
+ * =========================================
+ * CUSTOM SCROLLBAR STYLES
+ * =========================================
+ */
+
+/* Works on Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface1) var(--base);
+}
+
+/* Works on Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--base);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--surface1);
+    border-radius: 20px;
+    border: 3px solid var(--base);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--mauve);
+}

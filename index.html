@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momento - To Do Tasks Manager</title>
+    <link rel="stylesheet" href="background.css"> 
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <!-- Visually hidden announcer for screen readers -->
+    <div class="sr-announcer" aria-live="assertive" aria-atomic="true"></div>
+
+    <div class="container">
+        <header>
+            <div class="project-header">
+                <label for="project-selector" class="sr-only">Select Project</label>
+                <select id="project-selector"></select>
+                <div class="project-actions" role="group" aria-label="Project Actions">
+                    <button id="add-project-btn" class="header-action-btn" aria-label="Add New Project">+</button>
+                    <button id="edit-project-btn" class="header-action-btn" aria-label="Edit Current Project Name"></button>
+                    <button id="delete-project-btn" class="header-action-btn" aria-label="Delete Current Project"></button>
+                    <button id="copy-all-tasks-btn" class="header-action-btn" aria-label="Copy All Tasks to Clipboard"></button>
+                </div>
+            </div>
+            <div class="task-summary">
+                <h1 id="project-title"></h1>
+                <span id="task-count-wrapper" aria-live="polite" aria-atomic="true">
+                    <span id="task-count"></span>
+                </span>
+            </div>
+            <div class="progress-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-labelledby="project-title">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </header>
+
+        <main>
+            <form id="task-form">
+                <label for="task-input" class="sr-only">Add a new task</label>
+                <input type="text" id="task-input" placeholder="Add a task to this project...">
+                <button type="submit" aria-label="Add Task">+</button>
+            </form>
+
+            <div class="task-controls">
+                <div id="filter-buttons" role="group" aria-label="Filter tasks">
+                    <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+                    <button class="filter-btn" data-filter="active" aria-pressed="false">Active</button>
+                    <button class="filter-btn" data-filter="completed" aria-pressed="false">Completed</button>
+                </div>
+                <button id="clear-completed-btn">Clear Completed</button>
+            </div>
+
+            <ul id="task-list" aria-live="polite"></ul>
+
+            <div id="empty-state" class="hidden">
+                <p>A clear list is a clear mind.</p>
+                <span>Add a task to get started.</span>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
